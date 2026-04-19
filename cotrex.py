@@ -83,7 +83,8 @@ def cotrex_refresh_creds_if_needed():
 
 def cotrex_stream_file(url, filename):
     cotrex_refresh_creds_if_needed()
-    response = requests.get(url + f'&access_token={creds['access_token']}', stream=True)
+    access_token = creds['access_token']
+    response = requests.get(url + f'&access_token={access_token}', stream=True)
     if response.status_code != 200:
         fn = os.path.basename(filename)
         print(f'ERROR: failed to stream file {fn}: {response.status_code} {response.text}', file=sys.stderr)
